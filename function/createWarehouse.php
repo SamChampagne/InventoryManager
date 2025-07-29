@@ -21,17 +21,10 @@ function createWarehouse($name, $location) {
     if ($stmt->execute()) {
         $warehouseId = $conn->insert_id;
 
-        // 2. Créer l'inventaire associé
-        $stmt2 = $conn->prepare("INSERT INTO inventory (warehouse_id) VALUES (?)");
-        $stmt2->bind_param("i", $warehouseId);
-
-        if ($stmt2->execute()) {
-            return $warehouseId; // succès
-        } else {
-            // rollback si inventaire échoue (optionnel si pas de transaction)
-            return false;
-        }
+        // Pas besoin de créer une entrée dans l'inventaire ici
+        return $warehouseId; // succès
     } else {
         return false;
     }
 }
+

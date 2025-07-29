@@ -1,6 +1,17 @@
 <body class="bg-light">
 
 <div class="container py-4">
+    <?php 
+    if (!empty($_SESSION['errors_create_warehouses']) && is_array($_SESSION['errors_create_warehouses'])): ?>
+            <div class="alert alert-danger">
+                <ul>
+                    <?php foreach ($_SESSION['errors_create_warehouses'] as $error): ?>
+                        <li><?= htmlspecialchars($error) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <?php unset($_SESSION['errors_create_warehouses']); ?>
+    <?php endif; ?>
     <div class="card mb-4">
         <div class="card-header bg-primary text-white">
             Créer un Nouvel Entrepôt
@@ -35,7 +46,8 @@
 
                 <div class="col-12">
                     <button type="submit" class="btn btn-success">Créer l'entrepôt</button>
-                    <button type="button" class="btn btn-secondary" onclick="window.history.back()">Annuler</button>
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='?page=add_warehouse'">Annuler</button>
+
                 </div>
             </form>
         </div>
@@ -60,9 +72,11 @@ Swal.fire({
 <script>
 Swal.fire({
     icon: 'error',
-    title: 'Erreur',
     html: <?= json_encode(implode('<br>', array_map('htmlspecialchars', $errors))) ?>,
-    confirmButtonText: 'Corriger'
+    toast: true,
+    position: 'top-end',
+    confirmButtonText: 'Corriger',
+    timer: 3000
 });
 </script>
 <?php endif; ?>

@@ -3,7 +3,7 @@
 require_once '../function/createUser.php';
 
 $errors = [];
-$success = false;
+$success_user = false;
 
 $page = $_GET['page'] ?? 'home';
 
@@ -40,8 +40,10 @@ if ($page === 'add_employe' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+$_SESSION['errors_create_users'] = $errors;
+
 if (!empty($_SESSION['createUserSuccess'])) {
-    $success = true;
+    $success_user = true;
     unset($_SESSION['createUserSuccess']);
 }
 ?>

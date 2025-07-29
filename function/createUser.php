@@ -23,8 +23,8 @@ function createUser($username,$email, $password, $role) {
     $stmt->bind_param("ssss", $username, $email, $hashedPassword, $role);
 
     if ($stmt->execute()) {
-        return true; // User created successfully
+        return true; 
     } else {
-        return false; // Error creating user
+        return false; 
     }
 }

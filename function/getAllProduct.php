@@ -5,7 +5,7 @@ require_once '../config/dbConfig.php';
  *
  * @return array Un tableau associatif contenant tous les produits.
  */
-function getAllProducts() {
+function getAllProduct() {
     
 
     $db = new Database();

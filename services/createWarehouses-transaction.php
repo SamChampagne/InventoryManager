@@ -32,7 +32,7 @@ if ($page === 'add_warehouse' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-
+$_SESSION['errors_create_warehouses'] = $errors;
 if (!empty($_SESSION['createWarehouseSuccess'])) {
     $success = true;
     unset($_SESSION['createWarehouseSuccess']);

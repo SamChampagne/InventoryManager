@@ -16,6 +16,6 @@ function getAllUsers() {
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC); // Return all users as an associative array
     } else {
-        return []; // Return an empty array on failure
+        return []; 
     }
 }

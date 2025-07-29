@@ -2,10 +2,22 @@
 <body class="bg-light">
 
 <div class="container py-4">
+    <?php 
+    if (!empty($_SESSION['errors_create_users']) && is_array($_SESSION['errors_create_users'])): ?>
+            <div class="alert alert-danger">
+                <ul>
+                    <?php foreach ($_SESSION['errors_create_users'] as $error): ?>
+                        <li><?= htmlspecialchars($error) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
     <div class="card mb-4">
+        
         <div class="card-header bg-primary text-white">
             Créer un Nouvel Employé
         </div>
+        
         <div class="card-body">
             <form method="POST" class="row g-3" novalidate>
                 <input type="hidden" name="step" value="add">
@@ -70,9 +82,10 @@
 
 
 
-<?php if ($success): ?>
+<?php if ($success_user): ?>
 
 <script>
+    
 Swal.fire({
     icon: 'success',
     title: 'L\'employé a été créé avec succès.',
