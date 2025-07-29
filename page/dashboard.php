@@ -1,7 +1,11 @@
 <?php
 session_start();
 
+require_once '../config/dbConfig.php';
 include_once '../services/createUser-transaction.php';
+include_once '../services/getAllUser-transaction.php';
+include_once '../services/getAllWarehouses-transaction.php';
+include_once '../services/createWarehouses-transaction.php';
 
 // Empêcher le cache navigateur
 header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
@@ -13,22 +17,19 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../index.php');
     exit;
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8" />
     <title>Dashboard</title>
     <link rel="stylesheet" href="../css/dashboard.css" />
-    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body>
 
 <nav>
@@ -51,6 +52,8 @@ if (!isset($_SESSION['user_id'])) {
         <div class="menu-section">
             <div class="menu-toggle">Entrepôt ▸</div>
             <div class="submenu">
+                <!-- LISTER ENTREPÔTS -->
+                <a href="?page=liste_warehouse" class="<?= ($_GET['page'] ?? '') === 'liste_warehouse' ? 'active' : '' ?>">Lister Entrepôts</a>
                 <a href="?page=add_warehouse" class="<?= ($_GET['page'] ?? '') === 'add_warehouse' ? 'active' : '' ?>">Créer Entrepôt</a>
             </div>
         </div>
@@ -59,6 +62,8 @@ if (!isset($_SESSION['user_id'])) {
         <div class="menu-section">
             <div class="menu-toggle">Produit ▸</div>
             <div class="submenu">
+                <!-- LISTER PRODUITS -->
+                <a href="?page=liste_product" class="<?= ($_GET['page'] ?? '') === 'liste_product' ? 'active' : '' ?>">Lister Produits</a>
                 <a href="?page=add_product" class="<?= ($_GET['page'] ?? '') === 'add_product' ? 'active' : '' ?>">Ajouter Produit</a>
             </div>
         </div>
@@ -77,6 +82,7 @@ switch ($page) {
     case 'add_warehouse':
         if ($_SESSION['role'] !== 'admin') { echo "Accès refusé."; break; }
         echo "<h2>Créer un Entrepôt</h2>";
+        include_once './create_Warehouses.php'; // Formulaire de création d'entrepôt
         // form ici
         break;
 
@@ -111,6 +117,17 @@ switch ($page) {
     case 'warehouse':
     default:
         echo "<h2>Section Warehouse</h2>";
+        break;
+    case 'liste_product':
+    if ($_SESSION['role'] !== 'admin') { echo "Accès refusé."; break; }
+        echo "<h2>Liste des Produits</h2>";
+        //include_once './liste_produit.php'; // Fichier à créer avec ta logique de listing
+        break;
+
+    case 'liste_warehouse':
+        if ($_SESSION['role'] !== 'admin') { echo "Accès refusé."; break; }
+        echo "<h2>Liste des Entrepôts</h2>";
+        include_once './liste_Warehouses.php'; // Fichier à créer avec ta logique de listing
         break;
 }
 ?>
