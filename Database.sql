@@ -43,7 +43,7 @@ CREATE TABLE products (
 CREATE TABLE inventory (
     id INT AUTO_INCREMENT PRIMARY KEY,
     warehouse_id INT NOT NULL,
-    product_id INT NOT NULL,
+    product_id INT,
     quantity INT DEFAULT 0,
     UNIQUE (warehouse_id, product_id),
     FOREIGN KEY (warehouse_id) REFERENCES warehouses(id) ON DELETE CASCADE,
