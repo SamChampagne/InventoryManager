@@ -56,7 +56,7 @@
 
 
 
-<?php if (!empty($success) && $success): ?>
+<?php if ($success_warehouse): ?>
 <script>
 Swal.fire({
     icon: 'success',

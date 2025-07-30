@@ -17,6 +17,7 @@ $warehouses = getAllWarehouses();
 $success = false;
 $errors = [];
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_POST['user_id'] ?? '';
     $warehouse_id = $_POST['warehouse_id'] ?? '';

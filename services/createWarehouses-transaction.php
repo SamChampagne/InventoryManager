@@ -3,7 +3,7 @@
 require_once '../function/createWarehouse.php'; // à créer : fonction createWarehouse($name, $address)
 
 $errors = [];
-$success = false;
+$success_warehouse = false;
 
 $page = $_GET['page'] ?? 'home';
 
@@ -34,6 +34,6 @@ if ($page === 'add_warehouse' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 $_SESSION['errors_create_warehouses'] = $errors;
 if (!empty($_SESSION['createWarehouseSuccess'])) {
-    $success = true;
+    $success_warehouse = true;
     unset($_SESSION['createWarehouseSuccess']);
 }

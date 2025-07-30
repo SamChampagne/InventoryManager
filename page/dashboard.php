@@ -10,6 +10,8 @@ include_once '../services/createWarehouses-transaction.php';
 include_once '../services/getAllProduct-transaction.php';
 include_once '../services/createProduct-transaction.php';
 include_once '../services/assignUserToWarehouses-transaction.php';
+include_once '../services/listeInventoryToUser-transaction.php';
+include_once '../services/createProductInInventory-transaction.php';
 
 // Empêcher le cache navigateur
 header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
@@ -37,7 +39,7 @@ if (!isset($_SESSION['user_id'])) {
 <body>
 
 <nav class="" style="max-height: 100vh; overflow-y: auto;">
-   
+
     <div style="padding: 20px; font-size: 12px; font-weight: bold; color: #ecf0f1; border-bottom: 1px solid #7f8c8d;">
         <a href="?page=information" style="text-decoration: none;">
         Bienvenue, <?= htmlspecialchars($_SESSION['user_name']) ?>
@@ -152,9 +154,11 @@ switch ($page) {
         break;
     case 'inventaire_warehouse':
         echo "<h2>Inventaire des Entrepôts</h2>";
+        include_once './inventory/liste_inventory_to_user.php';
         break;
     case 'add_to_inventory':
         echo "<h2>Ajouter un Produit à l'Inventaire</h2>";
+        include_once './inventory/create_product_in_inventory.php';
         break;  
 }
 ?>

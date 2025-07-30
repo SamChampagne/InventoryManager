@@ -1,10 +1,4 @@
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Liste des entrepôts</title>
-</head>
 <body class="bg-light">
 
 <div class="container mt-5">
@@ -84,4 +78,4 @@
 </script>
 
 </body>
-</html>
+
