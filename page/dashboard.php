@@ -13,12 +13,7 @@ include_once '../services/assignUserToWarehouses-transaction.php';
 include_once '../services/listeInventoryToUser-transaction.php';
 include_once '../services/createProductInInventory-transaction.php';
 
-// Empêcher le cache navigateur
-header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
-header("Pragma: no-cache"); // HTTP 1.0
-header("Expires: 0"); // Proxies
-
-// Vérifie si utilisateur est connecté
+// Vérifie si utilisateur est connecté, le fait une fois, car on reste sur du single page qui est la dashboard.
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../index.php');
     exit;
@@ -38,7 +33,7 @@ if (!isset($_SESSION['user_id'])) {
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body>
 
-<nav class="" style="max-height: 100vh; overflow-y: auto;">
+<nav class="sidebar" style="max-height: 100vh; overflow-y: auto;">
 
     <div style="padding: 20px; font-size: 12px; font-weight: bold; color: #ecf0f1; border-bottom: 1px solid #7f8c8d;">
         <a href="?page=information" style="text-decoration: none;">
@@ -87,6 +82,16 @@ if (!isset($_SESSION['user_id'])) {
             </div>
         </div>
     <?php endif; ?>
+    <?php if($_SESSION['role'] === 'employee'): ?>
+        <div class="menu-section">
+            <div class="menu-toggle">Inventaire ▸</div>
+            <div class="submenu">
+                <!-- LISTER PRODUITS -->
+                <a href="?page=inventaire_warehouse" class="<?= ($_GET['page'] ?? '') === 'inventaire_warehouse' ? 'active' : '' ?>">Inventaire/Entrepôt</a>
+                <a href="?page=add_to_inventory" class="<?= ($_GET['page'] ?? '') === 'add_to_inventory' ? 'active' : '' ?>">Ajouter dans un inventaire</a>
+            </div>
+        </div>
+    <?php endif; ?>
 
     <a href="./logout.php" style="margin-top:auto; color:#e74c3c; padding: 15px 20px; border-left:none;">Déconnexion</a>
 </nav>
@@ -102,7 +107,6 @@ switch ($page) {
         if ($_SESSION['role'] !== 'admin') { echo "Accès refusé."; break; }
         echo "<h2>Créer un Entrepôt</h2>";
         include_once './warehouses/create_Warehouses.php'; // Formulaire de création d'entrepôt
-        // form ici
         break;
 
     case 'add_product':
@@ -127,15 +131,6 @@ switch ($page) {
         echo "<h2>Liste des Employés</h2>";
         echo "<p>Liste des employés avec options de gestion et de modification.</p>";
         include_once './users/liste_User.php';
-        break;
-
-    case 'produit':
-        echo "<h2>Section Produit</h2>";
-        break;
-
-    case 'warehouse':
-    default:
-        echo "<h2>Section Warehouse</h2>";
         break;
     case 'liste_product':
     if ($_SESSION['role'] !== 'admin') { echo "Accès refusé."; break; }

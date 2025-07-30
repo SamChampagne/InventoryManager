@@ -31,6 +31,11 @@
                         <button type="submit" class="btn btn-success">Enregistrer</button>
                         <button type="button" class="btn btn-secondary" onclick="window.location.href = window.location.href;">Annuler</button>
                     </div>
+                </form><br>
+                <form method="POST" class="d-inline delete-product-form">
+                    <input type="hidden" name="step-product-delete" value="delete">
+                    <input type="hidden" name="id" value="<?= htmlspecialchars($editingProduct['id']) ?>">
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
                 </form>
             </div>
         </div>
@@ -82,6 +87,47 @@
         $('#productTable').DataTable();
     });
 </script>
+<!-- SweetAlert messages -->
+<?php if ($delete_product_alert): ?>
+<script>
+Swal.fire({
+    icon: 'success',
+    title: 'Produit supprimé avec succès',
+    toast: true,
+    position: 'top-end',
+    timer: 3000,
+    timerProgressBar: true,
+    showConfirmButton: false
+});
+</script>
+<?php endif; ?>
+<script>
+const form = document.querySelector('.delete-product-form');
+if (form) {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
 
+        Swal.fire({
+            title: 'Êtes-vous sûr ?',
+            text: "Cette action supprimera le produit de façon permanente.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Oui, supprimer',
+            cancelButtonText: 'Annuler',
+            heightAuto: false,
+            backdrop: true,
+            customClass: {
+                popup: 'swal-popup-clean'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+}
+</script>
 </body>
 

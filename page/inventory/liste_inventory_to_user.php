@@ -33,8 +33,8 @@
                 <tbody>
                     <?php foreach ($inventory as $item): ?>
                         <tr>
-                            <td><?= htmlspecialchars($item['warehouse_id']) ?></td>
-                            <td><?= htmlspecialchars($item['product_id']) ?></td>
+                            <td><?= htmlspecialchars($item['product_name']) ?></td>
+                            <td><?= htmlspecialchars($item['product_description']) ?></td>
                             <td><?= (int)$item['quantity'] ?></td>
                         </tr>
                     <?php endforeach; ?>

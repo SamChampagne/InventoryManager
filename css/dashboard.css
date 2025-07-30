@@ -41,6 +41,7 @@
             padding-top: 20px;
             display: flex;
             flex-direction: column;
+            z-index: 999 !important;
         }
         nav a {
             color: #ecf0f1;
@@ -66,4 +67,3 @@
             font-size: 18px;
             font-weight: bold;
         }
-        

@@ -12,6 +12,7 @@ function deleteUsers($id) {
     $conn = $db->getConnection();
 
     // Préparer la requête de suppression
+    
     $stmt = $conn->prepare("DELETE FROM users WHERE id = ?");
     $stmt->bind_param("i", $id);
 

@@ -4,10 +4,88 @@ require_once '../function/createProduct.php';
 
 $errors = [];
 $success_product = false;
-
+$importProduct = false;
 $page = $_GET['page'] ?? 'home';
 
-if ($page === 'add_product' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['step-import']) && $_POST['step-import'] === '2') {
+
+    if (isset($_FILES['csvFile']) && $_FILES['csvFile']['error'] === UPLOAD_ERR_OK) {
+        $fileTmp = $_FILES['csvFile']['tmp_name'];
+        $fileName = $_FILES['csvFile']['name'];
+
+        // Vérification extension
+        $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+        if ($ext !== 'csv') {
+            $errors[] = "Le fichier doit être au format CSV.";
+        } else {
+            $handle = fopen($fileTmp, 'r');
+            if (!$handle) {
+                $errors[] = "Impossible d'ouvrir le fichier.";
+            } else {
+                $lineNumber = 0;
+                $insertCount = 0;
+                while (($data = fgetcsv($handle, 1000, ",")) !== false) { 
+                    $lineNumber++;
+
+                    // Si ta première ligne est un header, tu peux la sauter ainsi:
+                    if ($lineNumber == 1) {
+                        // Optionnel: vérifier si header, sinon commenter la ligne suivante pour traiter tout
+                        $header = array_map('strtolower', $data);
+                        if (in_array('name', $header) && in_array('type', $header) && in_array('description', $header)) {
+                            continue; // saute la ligne d'en-tête
+                        }
+                    }
+
+                    // Normalement $data est un tableau des colonnes
+                    // Exemple pour 3 colonnes : name,type,description
+                    if (count($data) < 3) {
+                        $errors[] = "Ligne $lineNumber invalide (colonnes manquantes).";
+                        continue;
+                    }
+
+                    $name = trim($data[0]);
+                    $type = trim($data[1]);
+                    $description = trim($data[2]);
+
+                    // Validation simple
+                    if ($name === '' || $type === '' || $description === '') {
+                        $errors[] = "Ligne $lineNumber contient des champs vides obligatoires.";
+                        continue;
+                    }
+
+                    // Insert produit
+                    $created = createProduct($name, $description, $type);
+                    if (!$created) {
+                        $errors[] = "Erreur insertion ligne $lineNumber : produit non créé (peut-être déjà existant).";
+                    } else {
+                        $insertCount++;
+                    }
+                }
+                fclose($handle);
+
+                if ($insertCount > 0) {
+                    $success_product = true;
+                    $_SESSION['createProductSuccess'] = true;
+                    $_SESSION['success_message'] = "$insertCount produit(s) importé(s) avec succès.";
+                } else {
+                    if (empty($errors)) {
+                        $errors[] = "Aucun produit importé.";
+                    }
+                }
+            }
+        }
+    } else {
+        $errors[] = "Aucun fichier reçu ou erreur d'upload.";
+    }
+}
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['step-import']) && $_POST['step-import'] === 'import') {
+
+    $importProduct = true;
+
+}
+    // Si pas d'erreur, insertion
+if ($page === 'add_product' && $_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['step-import'])) {
+
     $name = trim($_POST['name'] ?? '');
     $type = trim($_POST['type'] ?? '');
     $description = trim($_POST['description'] ?? '');

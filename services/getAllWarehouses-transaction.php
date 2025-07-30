@@ -1,7 +1,8 @@
 <?php
 
 include_once '../function/getAllWarehouse.php';
-
+include_once '../function/deleteWarehouses.php';
+$delete_warehouse_alert = false;
 $db = new Database();
 $conn = $db->getConnection();
 
@@ -29,6 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['step-w']) && $_POST['
     $editingWarehouse = $result->fetch_assoc();
 }
 
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['step-warehouse-delete']) && $_POST['step-warehouse-delete'] == 'delete') {
+    $id = $_POST['id'];
+    deleteWarehouses($id);
+    $delete_warehouse_alert = true; // Indicate that the warehouse was deleted successfully
+}
 $warehouses = getAllWarehouses();
 
 ?>

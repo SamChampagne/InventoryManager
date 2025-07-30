@@ -1,7 +1,9 @@
 <?php
 
 include_once '../function/getAllProduct.php';
+include_once '../function/deleteProduct.php';
 
+$delete_product_alert = false;
 $db = new Database();
 $conn = $db->getConnection();
 
@@ -30,6 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['step-p']) && $_POST['
     $editingProduct = $result->fetch_assoc();
 }
 
+// Étape 3 : Suppression du produit
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['step-product-delete']) && $_POST['step-product-delete'] == 'delete') {
+    $id = $_POST['id'];
+    deleteProduct($id);
+    $delete_product_alert = true; // Indicate that the product was deleted successfully
+}
 // Récupérer tous les produits pour affichage
 $products = getAllProduct();
 
