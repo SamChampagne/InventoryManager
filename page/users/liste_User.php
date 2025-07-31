@@ -118,7 +118,7 @@ Swal.fire({
 const form = document.querySelector('.delete-user-form');
 if (form) {
     form.addEventListener('submit', function(e) {
-        e.preventDefault(); // Empêche la soumission immédiate du formulaire
+        e.preventDefault(); 
 
         Swal.fire({
             title: 'Êtes-vous sûr ?',

@@ -9,6 +9,7 @@ function getInventoryByWarehouse($warehouse_id) {
         SELECT 
             inventory.id,
             inventory.quantity,
+            products.id AS product_id,
             products.name AS product_name,
             products.description AS product_description,
             warehouses.name AS warehouse_name

@@ -49,5 +49,18 @@ CREATE TABLE inventory (
     FOREIGN KEY (warehouse_id) REFERENCES warehouses(id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
-
+CREATE TABLE transaction_history (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT DEFAULT NULL,
+    product_id INT NOT NULL,
+    warehouse_id_from INT DEFAULT NULL,
+    warehouse_id_to INT DEFAULT NULL,
+    operation_type ENUM('transfert', 'ajout', 'suppression', 'modification') NOT NULL,
+    quantity INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+    FOREIGN KEY (warehouse_id_from) REFERENCES warehouses(id) ON DELETE SET NULL,
+    FOREIGN KEY (warehouse_id_to) REFERENCES warehouses(id) ON DELETE SET NULL
+);
 

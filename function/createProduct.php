@@ -18,8 +18,8 @@ function createProduct($productName, $productDescription, $productType) {
     $stmt->bind_param("sss", $productName, $productType, $productDescription);
 
     if ($stmt->execute()) {
-        return true; // Product created successfully
+        return true; 
     } else {
-        return false; // Error creating user
+        return false; 
     }
 }

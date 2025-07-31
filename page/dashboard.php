@@ -12,6 +12,8 @@ include_once '../services/createProduct-transaction.php';
 include_once '../services/assignUserToWarehouses-transaction.php';
 include_once '../services/listeInventoryToUser-transaction.php';
 include_once '../services/createProductInInventory-transaction.php';
+include_once '../services/listeHistoryInventory-transaction.php';
+
 
 // Vérifie si utilisateur est connecté, le fait une fois, car on reste sur du single page qui est la dashboard.
 if (!isset($_SESSION['user_id'])) {
@@ -72,13 +74,14 @@ if (!isset($_SESSION['user_id'])) {
                 <a href="?page=add_product" class="<?= ($_GET['page'] ?? '') === 'add_product' ? 'active' : '' ?>">Ajouter Produit</a>
             </div>
         </div>
-        <!-- PRODUIT -->
+        <!-- Inventaire -->
         <div class="menu-section">
             <div class="menu-toggle">Inventaire ▸</div>
             <div class="submenu">
                 <!-- LISTER PRODUITS -->
                 <a href="?page=inventaire_warehouse" class="<?= ($_GET['page'] ?? '') === 'inventaire_warehouse' ? 'active' : '' ?>">Inventaire/Entrepôt</a>
                 <a href="?page=add_to_inventory" class="<?= ($_GET['page'] ?? '') === 'add_to_inventory' ? 'active' : '' ?>">Ajouter dans un inventaire</a>
+                <a href="?page=historique_inventaire" class="<?= ($_GET['page'] ?? '') === 'historique_inventaire' ? 'active' : '' ?>">Historique d'inventaire</a>
             </div>
         </div>
     <?php endif; ?>
@@ -154,6 +157,10 @@ switch ($page) {
     case 'add_to_inventory':
         echo "<h2>Ajouter un Produit à l'Inventaire</h2>";
         include_once './inventory/create_product_in_inventory.php';
+        break;  
+    case 'historique_inventaire':
+        echo "<h2>Historique des inventaires/transactions</h2>";
+        include_once './inventory/liste_history_inventory.php';
         break;  
 }
 ?>
