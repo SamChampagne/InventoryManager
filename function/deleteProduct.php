@@ -1,5 +1,6 @@
 <?php
-require_once '../config/dbConfig.php';
+require_once __DIR__ . '/../config/dbConfig.php';
+require_once __DIR__ . '/../function/getProductById.php';
 /**
  * Supprime un produit par son ID.
  *
@@ -8,6 +9,10 @@ require_once '../config/dbConfig.php';
  */
 function deleteProduct($id) {
     
+    $product = getProductById($id);
+    if (!$product) {
+        return false; // Le produit n'existe pas
+    }
 
     $db = new Database();
     $conn = $db->getConnection();
@@ -18,8 +23,8 @@ function deleteProduct($id) {
 
     // Exécuter la requête
     if ($stmt->execute()) {
-        return true; // Suppression réussie
+        return true; 
     } else {
-        return false; // Échec de la suppression
+        return false; 
     }
 }

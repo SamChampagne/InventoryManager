@@ -1,6 +1,7 @@
 <?php 
 
-require_once '../config/dbConfig.php';
+require_once __DIR__ . '/../config/dbConfig.php';
+
 /**
  * Crée un nouveau produit.
  *
@@ -10,7 +11,9 @@ require_once '../config/dbConfig.php';
  * @return bool True si le produit a été créé avec succès, sinon false.
  */
 function createProduct($productName, $productDescription, $productType) {
-
+    if (empty($productName) || empty($productType)) {
+        return false;
+    }
     $db = new Database();
     $conn = $db->getConnection();
 

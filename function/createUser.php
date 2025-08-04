@@ -1,6 +1,7 @@
 <?php 
 
-require_once '../config/dbConfig.php';
+require_once __DIR__ . '/../config/dbConfig.php';
+
 
 /**
  * Crée un nouvel utilisateur.
@@ -12,7 +13,10 @@ require_once '../config/dbConfig.php';
  */
 function createUser($username,$email, $password, $role) {
    
-
+    if(empty($username) || empty($email) || empty($password) || empty($role)) {
+        return false;
+    }
+    
     $db = new Database();
     $conn = $db->getConnection();
 

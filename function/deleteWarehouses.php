@@ -1,5 +1,6 @@
 <?php 
-require_once '../config/dbConfig.php';
+require_once __DIR__ . '/../config/dbConfig.php';
+require_once __DIR__ . '/../function/getWarehouseById.php';
 /**
  * Supprime un entrepôt par son ID.
  *
@@ -8,7 +9,10 @@ require_once '../config/dbConfig.php';
  */
 function deleteWarehouses($id) {
     
-
+    $warehouse = getWarehouseById($id);
+    if (!$warehouse) {
+        return false; 
+    }
     $db = new Database();
     $conn = $db->getConnection();
 
@@ -18,8 +22,8 @@ function deleteWarehouses($id) {
 
     // Exécuter la requête
     if ($stmt->execute()) {
-        return true; // Suppression réussie
+        return true; 
     } else {
-        return false; // Échec de la suppression
+        return false; 
     }
 }

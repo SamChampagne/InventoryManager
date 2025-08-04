@@ -1,6 +1,7 @@
 <?php
 
-require_once '../config/dbConfig.php';
+require_once __DIR__ . '/../config/dbConfig.php';
+
 
 /**
  * Récupère les entrepôts (avec nom) assignés à un utilisateur spécifique.

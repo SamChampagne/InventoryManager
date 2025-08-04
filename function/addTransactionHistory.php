@@ -1,6 +1,6 @@
 <?php
 
-require_once '../config/dbConfig.php';
+require_once __DIR__ . '/../config/dbConfig.php';
 
 
 /**
@@ -15,6 +15,11 @@ require_once '../config/dbConfig.php';
  * et retourne false.
  */
 function addTransactionHistory($userId, $productId, $warehouseFrom, $warehouseTo, $operationType, $quantity) {
+
+    if(empty($productId)){
+        return false;
+    }
+
     $db = new Database();
     $conn = $db->getConnection();
 

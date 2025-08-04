@@ -1,5 +1,6 @@
 <?php 
-require_once '../config/dbConfig.php';
+require_once __DIR__ . '/../config/dbConfig.php';
+require_once __DIR__ . '/../function/getUserById.php';
 /**
  * Supprime un utilisateur par son ID.
  *
@@ -8,6 +9,10 @@ require_once '../config/dbConfig.php';
  */
 function deleteUsers($id) {
 
+    $user = getUserById($id);
+    if (!$user) {
+        return false; 
+    }
     $db = new Database();
     $conn = $db->getConnection();
 
@@ -18,8 +23,8 @@ function deleteUsers($id) {
 
     // Exécuter la requête
     if ($stmt->execute()) {
-        return true; // Suppression réussie
+        return true; 
     } else {
-        return false; // Échec de la suppression
+        return false; 
     }
 }

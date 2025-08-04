@@ -1,5 +1,6 @@
 <body>
     <br>
+    <?php if (!empty($Liste_transaction_history)): ?>
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
             <tr>
@@ -28,4 +29,7 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+    <?php else: ?>
+        <div class="alert alert-info">Aucune transaction trouvée.</div>
+    <?php endif; ?>
 </body>

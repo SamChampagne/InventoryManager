@@ -1,7 +1,8 @@
 <?php 
+require_once __DIR__ . '/../config/dbConfig.php';
 
 function validateUserInWarehouse($userId, $warehouseId) {
-    require_once '../config/dbConfig.php';
+
 
     $db = new Database();
     $conn = $db->getConnection();

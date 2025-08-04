@@ -22,7 +22,7 @@ if ($page === 'add_to_inventory' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($quantity === '' || !is_numeric($quantity) || $quantity < 1) {
         $errors[] = "Quantité invalide.";
     }
-
+    
     // Insertion
     if (empty($errors)) {
         $added = addProductToInventory($product_id,$warehouse_id, $quantity);

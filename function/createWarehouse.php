@@ -1,6 +1,7 @@
 <?php 
 
-require_once '../config/dbConfig.php';
+require_once __DIR__ . '/../config/dbConfig.php';
+
 
 /**
 * Crée un nouvel entrepôt.
@@ -11,6 +12,9 @@ require_once '../config/dbConfig.php';
 */
 
 function createWarehouse($name, $location) {
+    if(empty($name) || empty($location)) {
+        return false; 
+    }
     $db = new Database();
     $conn = $db->getConnection();
 
@@ -19,10 +23,9 @@ function createWarehouse($name, $location) {
     $stmt->bind_param("ss", $name, $location);
 
     if ($stmt->execute()) {
-        $warehouseId = $conn->insert_id;
 
         // Pas besoin de créer une entrée dans l'inventaire ici
-        return $warehouseId; // succès
+        return true;;
     } else {
         return false;
     }

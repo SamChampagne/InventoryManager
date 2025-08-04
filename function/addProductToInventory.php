@@ -1,5 +1,7 @@
 <?php
-require_once '../config/dbConfig.php';
+require_once __DIR__ . '/../config/dbConfig.php';
+
+
 /**
  * Ajoute un produit à l'inventaire.
  *
@@ -9,6 +11,10 @@ require_once '../config/dbConfig.php';
  * @return bool Retourne true en cas de succès, false en cas d'échec.
  */
 function addProductToInventory($productId, $warehouseId, $quantity) {
+
+    if(empty($productId) || empty($warehouseId) || empty($quantity)) {
+        return false; 
+    }
 
     $db = new Database();
     $conn = $db->getConnection();

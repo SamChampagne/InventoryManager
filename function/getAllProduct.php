@@ -1,5 +1,6 @@
 <?php 
-require_once '../config/dbConfig.php';
+require_once __DIR__ . '/../config/dbConfig.php';
+
 /**
  * Récupère tous les produits.
  *

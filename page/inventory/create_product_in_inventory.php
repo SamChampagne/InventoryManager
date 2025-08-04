@@ -2,6 +2,7 @@
 
 <div class="container py-4">
     <?php 
+    // Affiche les erreurs de validation si elles existent dans le service
     if (!empty($_SESSION['errors_create_product']) && is_array($_SESSION['errors_create_product'])): ?>
         <div class="alert alert-danger">
             <ul>

@@ -1,7 +1,8 @@
 <?php
+require_once __DIR__ . '/../config/dbConfig.php';
 
 function getWarehouseById($warehouse_id) {
-    require_once '../config/dbConfig.php';
+
 
     $db = new Database();
     $conn = $db->getConnection();

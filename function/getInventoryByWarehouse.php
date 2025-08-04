@@ -1,5 +1,6 @@
 <?php
-require_once '../config/dbConfig.php';
+require_once __DIR__ . '/../config/dbConfig.php';
+
 
 function getInventoryByWarehouse($warehouse_id) {
     $db = new Database();

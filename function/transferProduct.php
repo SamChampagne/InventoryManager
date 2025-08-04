@@ -1,5 +1,6 @@
 <?php 
-require_once '../config/dbConfig.php';
+require_once __DIR__ . '/../config/dbConfig.php';
+
 
 function transferProduct($product_id, $target_warehouse_id, $quantity, $current_warehouse_id) {
     $db = new Database();
