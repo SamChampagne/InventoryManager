@@ -1,8 +1,9 @@
-
+<!-- Page de création d'un nouvel employé -->
 <body class="bg-light">
 
 <div class="container py-4">
     <?php 
+    // Affichage des erreurs de création d'employé
     if (!empty($_SESSION['errors_create_users']) && is_array($_SESSION['errors_create_users'])): ?>
             <div class="alert alert-danger">
                 <ul>
@@ -81,7 +82,7 @@
 </div>
 
 
-
+<!-- SweetAlert messages -->
 <?php if ($success_user): ?>
 
 <script>

@@ -1,7 +1,12 @@
 <?php
-require_once '../config/dbConfig.php';
+
+require_once __DIR__ . '/../config/dbConfig.php';
+require_once __DIR__ . '/../function/getUserByEmail.php';
+
+// Session pour la page de connexion
 session_start();
 
+// Vérification de la méthode de requête
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
@@ -33,19 +38,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 
-function getUserByEmail($email) {
-    $db = new Database();
-    $conn = $db->getConnection();
 
-    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-    if (!$stmt) {
-        return ;
-    }
-
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    return $result->fetch_assoc(); 
-}
 ?>

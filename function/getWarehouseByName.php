@@ -17,6 +17,8 @@ function getWarehouseByName($name) {
     $stmt->execute();
 
     $result = $stmt->get_result();
+    
+    // Retourne le tableau associatif de l'entrepôt
     if ($result && $result->num_rows > 0) {
         return $result->fetch_assoc(); 
     }

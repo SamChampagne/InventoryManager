@@ -1,6 +1,7 @@
 <?php 
 require_once __DIR__ . '/../config/dbConfig.php';
 require_once __DIR__ . '/../function/getWarehouseById.php';
+
 /**
  * Supprime un entrepôt par son ID.
  *

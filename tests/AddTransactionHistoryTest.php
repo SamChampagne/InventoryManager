@@ -1,8 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php'; // important
 require_once __DIR__ . '/../function/addTransactionHistory.php';
-
 
 use PHPUnit\Framework\TestCase;
 
@@ -33,18 +31,16 @@ class AddTransactionHistoryTest extends TestCase
      */
     public function testAddTransactionHistoryFailure()
     {
-        // Arrange
+        
         $userId = 1;
-        $productId = null;       // Invalide : NULL à la place d'un int
+        $productId = null;       
         $warehouseFrom = 1;
         $warehouseTo = 2;
         $operationType = 'move';
         $quantity = 5;
 
-        // Act
         $result = addTransactionHistory($userId, $productId, $warehouseFrom, $warehouseTo, $operationType, $quantity);
 
-        // Assert
         $this->assertFalse($result, "Une valeur invalide devrait retourner false.");
     }
 }

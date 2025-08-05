@@ -1,6 +1,6 @@
 <?php
 
-include_once '../function/addProductToInventory.php';
+require_once __DIR__ . '/../function/addProductToInventory.php';
 
 $errors = [];
 $success_product_inventory = false;

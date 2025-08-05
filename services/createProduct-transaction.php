@@ -1,6 +1,6 @@
 <?php
 
-require_once '../function/createProduct.php'; 
+require_once __DIR__ . '/../function/createProduct.php'; 
 
 $errors = [];
 $success_product = false;

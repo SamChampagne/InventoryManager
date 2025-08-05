@@ -1,6 +1,6 @@
 <?php
 
-require_once '../function/createUser.php';
+require_once __DIR__ . '/../function/createUser.php';
 
 $errors = [];
 $success_user = false;

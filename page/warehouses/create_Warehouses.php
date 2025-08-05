@@ -1,7 +1,9 @@
+<!-- Page de création d'un nouvel entrepôt -->
 <body class="bg-light">
 
 <div class="container py-4">
     <?php 
+    // Affichage des erreurs de création d'entrepôt
     if (!empty($_SESSION['errors_create_warehouses']) && is_array($_SESSION['errors_create_warehouses'])): ?>
             <div class="alert alert-danger">
                 <ul>
@@ -55,7 +57,7 @@
 </div>
 
 
-
+<!-- SweetAlert messages -->
 <?php if ($success_warehouse): ?>
 <script>
 Swal.fire({

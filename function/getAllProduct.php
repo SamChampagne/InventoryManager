@@ -8,15 +8,14 @@ require_once __DIR__ . '/../config/dbConfig.php';
  */
 function getAllProduct() {
     
-
     $db = new Database();
     $conn = $db->getConnection();
 
     $stmt = $conn->prepare("SELECT * FROM products");
     if ($stmt->execute()) {
         $result = $stmt->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC); // Return all products as an associative array
+        return $result->fetch_all(MYSQLI_ASSOC); 
     } else {
-        return []; // Return an empty array on failure
+        return []; 
     }
 }

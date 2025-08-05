@@ -1,6 +1,11 @@
 <?php
- require_once __DIR__ . '/../config/dbConfig.php'; // Chargement de la classe Database
-
+ require_once __DIR__ . '/../config/dbConfig.php'; 
+/**
+ * Recherche un produit dans la base par son nom exact.
+ *
+ * @param string $name Nom exact du produit à rechercher.
+ * @return array|null Retourne un tableau associatif du produit si trouvé, sinon null.
+ */
 function getProductByName($name) {
 
     $db = new Database();
@@ -17,8 +22,9 @@ function getProductByName($name) {
     $result = $stmt->get_result();
 
     if ($result && $row = $result->fetch_assoc()) {
+        // Retourne le tableau associatif du produit
         return $row; 
     }
 
-    return null; // Aucun produit trouvé
+    return null;
 }

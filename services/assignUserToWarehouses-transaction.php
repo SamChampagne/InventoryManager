@@ -1,10 +1,10 @@
 <?php
 
-include_once '../function/getAllUsers.php';
-include_once '../function/getAllWarehouse.php';
-include_once '../function/getAllEmployeAssignToWarehouses.php';
-include_once '../function/validateUserInWarehouse.php';
-include_once '../function/insertUserIntoWarehouse.php';
+require_once __DIR__ . '/../function/getAllUsers.php';
+require_once __DIR__ . '/../function/getAllWarehouses.php';
+require_once __DIR__ . '/../function/getAllEmployeAssignToWarehouses.php';
+require_once __DIR__ . '/../function/validateUserInWarehouse.php';
+require_once __DIR__ . '/../function/insertUserIntoWarehouse.php';
 // Récupérer tous les employés
 $employees_to_assign = getAllUsers();
 

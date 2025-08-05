@@ -1,6 +1,6 @@
 <?php
 
-require_once '../function/createWarehouse.php'; // à créer : fonction createWarehouse($name, $address)
+require_once __DIR__ . '/../function/createWarehouse.php'; 
 
 $errors = [];
 $success_warehouse = false;

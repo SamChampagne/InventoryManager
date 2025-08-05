@@ -1,8 +1,11 @@
 
+<!-- Page qui liste les entrepôts et permet de modifier les informations -->
+
 <body class="bg-light">
 
 <div class="container mt-5">
 
+    <!-- Vérification de l'édition d'un entrepôt -->
     <?php if ($editingWarehouse): ?>
         <div class="card mb-4">
             <div class="card-header bg-primary text-white">
@@ -71,16 +74,22 @@
 
 </div>
 
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- jQuery + DataTables JS -->
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
+<!-- DataTables Initialization -->
 <script>
     $(document).ready(function() {
     $('#warehouseTable').DataTable();
     });
 </script>
+
+<!-- SweetAlert messages -->
 <?php if ($delete_warehouse_alert): ?>
 <script>
 Swal.fire({
@@ -95,6 +104,7 @@ Swal.fire({
 </script>
 <?php endif; ?>
 <script>
+// Gestion de la confirmation de suppression d'un entrepôt
 const form = document.querySelector('.delete-warehouse-form');
 if (form) {
   form.addEventListener('submit', function(e) {

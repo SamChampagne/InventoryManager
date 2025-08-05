@@ -1,9 +1,10 @@
 <?php
-include_once '../function/getWarehouseAssignToUser.php';
-include_once '../function/getInventoryByWarehouse.php';
-include_once '../function/transferProduct.php';
-include_once '../function/addTransactionHistory.php';
+require_once __DIR__ . '/../function/getWarehouseAssignToUser.php';
+require_once __DIR__ . '/../function/getInventoryByWarehouse.php';
+require_once __DIR__ . '/../function/transferProduct.php';
+require_once __DIR__ . '/../function/addTransactionHistory.php';
 
+// Initialisation des variables
 $warehouse_assign_to_user = getWarehouseAssignToUser($_SESSION['user_id']);
 $show_transfer_form = false;
 $transfer_product_id = null;
@@ -17,7 +18,7 @@ $inventory = [];
 $errors_transfer = [];
 $selectedId = null;
 
-
+// Étape 1 : Sélection de l'entrepôt
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['step']) && $_POST['step'] === 'select_inventory') {
     if (isset($_POST['warehouse_id']) && $_POST['warehouse_id'] !== '') {
         $selectedId = intval($_POST['warehouse_id']);
@@ -31,8 +32,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['step']) && $_POST['st
     }
 }
 
+// Étape 2 : Sélection du produit à transférer
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['step-transfer']) && $_POST['step-transfer'] == 1) {
 
+    $transfer_product_id = $_POST['product_id'];
+    $transfer_product_name = $_POST['product_name'] ?? '';
+    $transfer_max_quantity = $_POST['product_quantity'] ?? 0;
+    $transfer_current_warehouse_id = $_POST['current_warehouse'] ?? null;
+    $show_transfer_form = true;
+}
 
+// Étape 3 : Transfert du produit
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['step-transfer']) && $_POST['step-transfer'] == 2) {
     
     // Récupération des données du formulaire
@@ -71,14 +81,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['step-transfer']) && $_
         }
     
 }
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['step-transfer']) && $_POST['step-transfer'] == 1) {
 
-    $transfer_product_id = $_POST['product_id'];
-    $transfer_product_name = $_POST['product_name'] ?? '';
-    $transfer_max_quantity = $_POST['product_quantity'] ?? 0;
-    $transfer_current_warehouse_id = $_POST['current_warehouse'] ?? null;
-    $show_transfer_form = true;
-}
+// Les variables pour l'affichage
+
 $_SESSION['errors_transfer'] = $errors_transfer;
 
 if (!empty($_SESSION['transferSuccess'])) {

@@ -1,7 +1,13 @@
 <?php
 require_once __DIR__ . '/../config/dbConfig.php';
 
-
+/**
+ * Récupère l'inventaire complet d'un entrepôt donné.
+ *
+ * @param int $warehouse_id ID de l'entrepôt dont on veut récupérer l'inventaire.
+ * @return array Retourne un tableau associatif contenant la liste des produits et quantités en stock pour l'entrepôt.
+ *               Retourne un tableau vide en cas d'erreur de préparation ou d'exécution de la requête.
+ */
 function getInventoryByWarehouse($warehouse_id) {
     $db = new Database();
     $conn = $db->getConnection();
@@ -20,10 +26,10 @@ function getInventoryByWarehouse($warehouse_id) {
         WHERE inventory.warehouse_id = ?
     ";
 
-    // Préparer la requête SQL (IMPORTANT)
+    // Préparer la requête SQL 
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
-        return []; // Échec préparation statement
+        return []; 
     }
 
     // Liaison du paramètre
@@ -33,7 +39,7 @@ function getInventoryByWarehouse($warehouse_id) {
     if ($stmt->execute()) {
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
-    } else {
-        return []; // Erreur exécution
-    }
+    } 
+    
+    return [];
 }

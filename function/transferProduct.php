@@ -1,7 +1,27 @@
 <?php 
 require_once __DIR__ . '/../config/dbConfig.php';
 
-
+/**
+ * Transfère une quantité d’un produit d’un entrepôt à un autre.
+ *
+ * Fonctionnement :
+ * - Utilise une transaction MySQL pour garantir l’intégrité des données.
+ * - Étapes :
+ *   1. Retire la quantité spécifiée du stock de l’entrepôt source.
+ *   2. Supprime l’entrée de stock si la quantité atteint 0.
+ *   3. Vérifie si l’entrepôt cible possède déjà le produit.
+ *      - Si oui, incrémente la quantité existante.
+ *      - Si non, crée une nouvelle entrée avec la quantité transférée.
+ * - En cas de succès, la transaction est validée (commit).
+ * - En cas d'erreur, la transaction est annulée (rollback).
+ *
+ * @param int $product_id            ID du produit à transférer.
+ * @param int $target_warehouse_id   ID de l'entrepôt de destination.
+ * @param int $quantity              Quantité à transférer.
+ * @param int $current_warehouse_id  ID de l'entrepôt source.
+ *
+ * @return bool Retourne true si le transfert a réussi, false en cas d’erreur (avec rollback).
+ */
 function transferProduct($product_id, $target_warehouse_id, $quantity, $current_warehouse_id) {
     $db = new Database();
     $conn = $db->getConnection();
@@ -43,7 +63,7 @@ function transferProduct($product_id, $target_warehouse_id, $quantity, $current_
         return true;
 
     } catch (Exception $e) {
-        $conn->rollback(); // Annuler la transaction en cas d'erreur
-        return false; // Échec du transfert
+        $conn->rollback(); 
+        return false; 
     }
 }

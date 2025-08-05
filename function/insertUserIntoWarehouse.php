@@ -1,8 +1,14 @@
 <?php
 require_once __DIR__ . '/../config/dbConfig.php';
-
-function insertUserIntoWarehouse($user_id, $warehouse_id) {
-
+/**
+ * Associe un utilisateur à un entrepôt en insérant une entrée dans la table employees.
+ *
+ * @param int $user_id      ID de l'utilisateur à assigner.
+ * @param int $warehouse_id ID de l'entrepôt auquel l'utilisateur est assigné.
+ * @return bool             Retourne true si l'insertion réussit, sinon false.
+ */
+function insertUserIntoWarehouse($user_id, $warehouse_id)
+{
 
     $db = new Database();
     $conn = $db->getConnection();
@@ -12,9 +18,5 @@ function insertUserIntoWarehouse($user_id, $warehouse_id) {
     $stmt->bind_param("ii", $user_id, $warehouse_id);
 
     // Exécuter la requête
-    if ($stmt->execute()) {
-        return true; // Insertion réussie
-    } else {
-        return false; // Échec de l'insertion
-    }
+    return $stmt->execute();
 }

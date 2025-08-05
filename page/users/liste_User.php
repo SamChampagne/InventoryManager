@@ -1,16 +1,4 @@
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Liste des utilisateurs</title>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-</head>
+<!-- Page qui liste les utilisateurs et permet de modifier les informations -->
 <body class="bg-light">
 
 <div class="container mt-5">
@@ -95,11 +83,14 @@
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
+<!-- DataTables Initialization -->
 <script>
   $(document).ready(function() {
     $('#userTable').DataTable();
   });
 </script>
+
+<!-- SweetAlert messages -->
 <?php if ($delete_user_alert): ?>
 <script>
 Swal.fire({
@@ -111,10 +102,11 @@ Swal.fire({
     timerProgressBar: true,
     showConfirmButton: false
 });
-
 </script>
 <?php endif; ?>
+
 <script>
+// Gestion de la confirmation de suppression d'un utilisateur
 const form = document.querySelector('.delete-user-form');
 if (form) {
     form.addEventListener('submit', function(e) {

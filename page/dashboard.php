@@ -1,18 +1,35 @@
 <?php
+/**
+ * Dashboard - Page principale de l'application
+ *
+ * Cette application est structurée comme une Single Page Application (SPA) en PHP.
+ * Toute la logique de navigation, d’affichage et de traitement des données est gérée
+ * à partir de ce seul fichier PHP principal.
+ *
+ * Les différentes sections (produits, entrepôts, employés, historique, etc.)
+ * sont affichées dynamiquement dans la même page en fonction de la valeur
+ * des variables $_GET['page'] et $_POST['step'].
+ *
+ * Aucune autre page HTML n’est appelée directement. Les actions utilisateurs
+ * (affichage, ajout, modification, suppression) déclenchent des changements d’état
+ * côté serveur, puis le bon contenu est généré et affiché dans cette même page.
+ *
+ */
+
 session_start();
 
 /** Déclaration des services pour chaque page que j'utilise */ 
-require_once '../config/dbConfig.php';
-include_once '../services/createUser-transaction.php';
-include_once '../services/getAllUser-transaction.php';
-include_once '../services/getAllWarehouses-transaction.php';
-include_once '../services/createWarehouses-transaction.php';
-include_once '../services/getAllProduct-transaction.php';
-include_once '../services/createProduct-transaction.php';
-include_once '../services/assignUserToWarehouses-transaction.php';
-include_once '../services/listeInventoryToUser-transaction.php';
-include_once '../services/createProductInInventory-transaction.php';
-include_once '../services/listeHistoryInventory-transaction.php';
+require_once __DIR__ . '/../config/dbConfig.php';
+require_once __DIR__ . '/../services/createUser-transaction.php';
+require_once __DIR__ . '/../services/getAllUser-transaction.php';
+require_once __DIR__ . '/../services/getAllWarehouses-transaction.php';
+require_once __DIR__ . '/../services/createWarehouses-transaction.php';
+require_once __DIR__ . '/../services/getAllProduct-transaction.php';
+require_once __DIR__ . '/../services/createProduct-transaction.php';
+require_once __DIR__ . '/../services/assignUserToWarehouses-transaction.php';
+require_once __DIR__ . '/../services/listeInventoryToUser-transaction.php';
+require_once __DIR__ . '/../services/createProductInInventory-transaction.php';
+require_once __DIR__ . '/../services/listeHistoryInventory-transaction.php';
 
 
 // Vérifie si utilisateur est connecté, le fait une fois, car on reste sur du single page qui est la dashboard.
@@ -21,8 +38,8 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -85,6 +102,8 @@ if (!isset($_SESSION['user_id'])) {
             </div>
         </div>
     <?php endif; ?>
+
+    <!-- Liste pour les employés -->
     <?php if($_SESSION['role'] === 'employee'): ?>
         <div class="menu-section">
             <div class="menu-toggle">Inventaire ▸</div>
@@ -103,64 +122,69 @@ if (!isset($_SESSION['user_id'])) {
 <main>
     
 <?php
+// Page par défaut
 $page = $_GET['page'] ?? 'information';
 
+/* * Gestion des pages
+ * Chaque case du switch correspond à une page différente de l'application.
+ * Le contenu de chaque page est inclus dynamiquement en fonction de la valeur de $_GET['page'].
+ */
 switch ($page) {
     case 'add_warehouse':
         if ($_SESSION['role'] !== 'admin') { echo "Accès refusé."; break; }
         echo "<h2>Créer un Entrepôt</h2>";
-        include_once './warehouses/create_Warehouses.php'; // Formulaire de création d'entrepôt
+        require_once __DIR__ . '/./warehouses/create_Warehouses.php'; // Formulaire de création d'entrepôt
         break;
 
     case 'add_product':
         if ($_SESSION['role'] !== 'admin') { echo "Accès refusé."; break; }
         echo "<h2>Ajouter un Produit</h2>";
-        include_once './products/create_Product.php'; // Formulaire de création de produit
+        require_once __DIR__ . '/./products/create_Product.php'; // Formulaire de création de produit
         break;
 
     case 'add_employe':
         if ($_SESSION['role'] !== 'admin') { echo "Accès refusé."; break; }
         echo "<h2>Créer un Employé</h2>";
-        include_once './users/create_employe.php'; // Formulaire de création d'employé
+        require_once __DIR__ . '/./users/create_employe.php'; // Formulaire de création d'employé
         break;
 
     case 'assign_employe':
         if ($_SESSION['role'] !== 'admin') { echo "Accès refusé."; break; }
         echo "<h2>Assigner un Employé à un Entrepôt</h2>";
-        include_once './users/assign_user_to_warehouse.php'; // Formulaire d'assignation d'employé
+        require_once __DIR__ . '/./users/assign_user_to_warehouse.php'; // Formulaire d'assignation d'employé
         break;
 
     case 'employe':
         echo "<h2>Liste des Employés</h2>";
         echo "<p>Liste des employés avec options de gestion et de modification.</p>";
-        include_once './users/liste_User.php';
+        require_once __DIR__ . '/./users/liste_User.php'; // Liste des employés
         break;
     case 'liste_product':
     if ($_SESSION['role'] !== 'admin') { echo "Accès refusé."; break; }
         echo "<h2>Liste des Produits/Matières</h2>";
-        include_once './products/liste_Product.php'; 
+        require_once __DIR__ . '/./products/liste_Product.php'; // Liste des produits
         break;
 
     case 'liste_warehouse':
         if ($_SESSION['role'] !== 'admin') { echo "Accès refusé."; break; }
         echo "<h2>Liste des Entrepôts</h2>";
-        include_once './warehouses/liste_Warehouses.php'; 
+        require_once __DIR__ . '/./warehouses/liste_Warehouses.php'; // Liste des entrepôts
         break;
     case 'information':
         echo "<h2>Informations</h2>";
-        include_once './information.php'; 
+        require_once __DIR__ . '/./information.php'; // Page d'informations générales
         break;
     case 'inventaire_warehouse':
         echo "<h2>Inventaire des Entrepôts</h2>";
-        include_once './inventory/liste_inventory_to_user.php';
+        require_once __DIR__ . '/./inventory/liste_inventory_to_user.php'; // Liste des inventaires accessible à l'utilisateur
         break;
     case 'add_to_inventory':
         echo "<h2>Ajouter un Produit à l'Inventaire</h2>";
-        include_once './inventory/create_product_in_inventory.php';
+        require_once __DIR__ . '/./inventory/create_product_in_inventory.php'; // Formulaire pour ajouter un produit à l'inventaire
         break;  
     case 'historique_inventaire':
         echo "<h2>Historique des inventaires/transactions</h2>";
-        include_once './inventory/liste_history_inventory.php';
+        require_once __DIR__ . '/./inventory/liste_history_inventory.php'; // Liste de l'historique des transactions d'inventaire
         break;  
 }
 ?>
@@ -168,6 +192,7 @@ switch ($page) {
 </body>
 
 <script>
+// Gestion du menu latéral
 document.querySelectorAll('.menu-toggle').forEach(toggle => {
     toggle.addEventListener('click', () => {
         const section = toggle.parentElement;
@@ -175,6 +200,7 @@ document.querySelectorAll('.menu-toggle').forEach(toggle => {
     });
 });
 
+// Empêche l'utilisateur de revenir en arrière dans l'historique du navigateur
 window.history.forward();
 function noBack() {
     window.history.forward();

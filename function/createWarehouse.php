@@ -2,7 +2,6 @@
 
 require_once __DIR__ . '/../config/dbConfig.php';
 
-
 /**
 * Crée un nouvel entrepôt.
 *
@@ -10,7 +9,6 @@ require_once __DIR__ . '/../config/dbConfig.php';
 * @param string $location L'emplacement de l'entrepôt.
 * @return bool True si l'entrepôt a été créé avec succès, sinon false.
 */
-
 function createWarehouse($name, $location) {
     if(empty($name) || empty($location)) {
         return false; 

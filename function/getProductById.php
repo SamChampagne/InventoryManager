@@ -17,7 +17,8 @@ function getProductById($id) {
     $result = $stmt->get_result();
 
     if ($result && $row = $result->fetch_assoc()) {
-        return $row; // Retourne le tableau associatif du produit
+        // Retourne le tableau associatif du produit
+        return $row; 
     }
     
     return null; 

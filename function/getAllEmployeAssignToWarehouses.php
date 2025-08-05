@@ -1,6 +1,11 @@
 <?php 
 require_once __DIR__ . '/../config/dbConfig.php';
-
+/**
+ * Récupère la liste de tous les employés avec leurs informations utilisateur et l'entrepôt auquel ils sont assignés.
+ *
+ * @return array Retourne un tableau associatif contenant la liste des employés avec leurs utilisateurs et entrepôts.
+ *               Retourne un tableau vide en cas d’échec de la requête.
+ */
 function getAllEmployeAssignToWarehouses() {
     
 
@@ -20,8 +25,9 @@ function getAllEmployeAssignToWarehouses() {
     ");
     if ($stmt->execute()) {
         $result = $stmt->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC); // Return all employees assigned to warehouses as an associative array
+        // Retourne toutes les transactions sous forme de tableau associatif
+        return $result->fetch_all(MYSQLI_ASSOC); 
     } else {
-        return []; // Return an empty array on failure
+        return [];
     }
 }

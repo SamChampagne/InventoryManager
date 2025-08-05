@@ -27,11 +27,11 @@ function getAllHistoryTransaction() {
             LEFT JOIN users u ON th.user_id = u.id
             ORDER BY th.created_at DESC
     ");
-    
     if ($stmt->execute()) {
         $result = $stmt->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC); // Retourne toutes les transactions sous forme de tableau associatif
+        // Retourne toutes les transactions sous forme de tableau associatif
+        return $result->fetch_all(MYSQLI_ASSOC); 
     } else {
-        return []; // Retourne un tableau vide en cas d'échec
+        return []; 
     }
 }   

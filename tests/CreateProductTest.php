@@ -14,8 +14,7 @@ class CreateProductTest extends TestCase
 
     public function testCreateProductFailure()
     {
-        // Pour simuler un échec, on peut par exemple forcer un type trop long (dépend du schéma)
-        // Ou alors on peut essayer un mock (plus compliqué). Ici on teste avec un argument null (qui peut échouer).
+        // Pour simuler un échec
 
         $result = createProduct(null, 'Description test', 'TypeTest');
         $this->assertFalse($result, "La création du produit avec un nom null doit retourner false");

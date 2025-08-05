@@ -2,7 +2,6 @@
 
 require_once __DIR__ . '/../config/dbConfig.php';
 
-
 /**
  * Récupère les entrepôts (avec nom) assignés à un utilisateur spécifique.
  *
@@ -26,7 +25,8 @@ function getWarehouseAssignToUser($user_id) {
     }
 
     $stmt->bind_param("i", $user_id);
-
+    
+    // Retourne le tableau associatif des entrepôts associés
     if ($stmt->execute()) {
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);

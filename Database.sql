@@ -1,4 +1,4 @@
--- Création de la base de données
+-- Création de la base de données et utilisateur admin
 DROP DATABASE IF EXISTS inventory_manager;
 CREATE DATABASE IF NOT EXISTS inventory_manager DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE inventory_manager;
@@ -49,6 +49,7 @@ CREATE TABLE inventory (
     FOREIGN KEY (warehouse_id) REFERENCES warehouses(id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
+-- Table d'historique des transactions
 CREATE TABLE transaction_history (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT DEFAULT NULL,
@@ -64,3 +65,11 @@ CREATE TABLE transaction_history (
     FOREIGN KEY (warehouse_id_to) REFERENCES warehouses(id) ON DELETE SET NULL
 );
 
+-- Insertion de l'utilisateur admin par défaut, mot de passe = admin
+INSERT INTO users (name, email, password, role)
+VALUES (
+  'admin',
+  'admin@example.com',
+  '$2y$10$DbLT1BfAZpJZObXSHN0GReWAkkzhrCnW2W3oWZl09MO6MrZuXMN/e', 
+  'admin'
+);

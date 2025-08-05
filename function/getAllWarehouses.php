@@ -15,8 +15,8 @@ function getAllWarehouses() {
     $stmt = $conn->prepare("SELECT * FROM warehouses");
     if ($stmt->execute()) {
         $result = $stmt->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC); // Return all warehouses as an associative array
+        return $result->fetch_all(MYSQLI_ASSOC); 
     } else {
-        return []; // Return an empty array on failure
+        return []; 
     }
 }

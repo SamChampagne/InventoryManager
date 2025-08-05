@@ -15,7 +15,7 @@ function getAllUsers() {
     $stmt = $conn->prepare("SELECT * FROM users");
     if ($stmt->execute()) {
         $result = $stmt->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC); // Return all users as an associative array
+        return $result->fetch_all(MYSQLI_ASSOC); 
     } else {
         return []; 
     }

@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/../config/dbConfig.php';
 
-
 /**
  * Récupère un utilisateur par son email.
  *
@@ -18,9 +17,9 @@ function getUserByEmail($email) {
     $stmt->execute();
     $result = $stmt->get_result();
 
+    // Retourne le tableau associatif de l'utilisateur
     if ($result->num_rows > 0) {
         return $result->fetch_assoc();
-    } else {
-        return null;
-    }
+    } 
+    return null;
 }
