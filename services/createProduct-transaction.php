@@ -9,6 +9,7 @@ $page = $_GET['page'] ?? 'home';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['step-import']) && $_POST['step-import'] === '2') {
 
+    // Gestion de l'import CSV
     if (isset($_FILES['csvFile']) && $_FILES['csvFile']['error'] === UPLOAD_ERR_OK) {
         $fileTmp = $_FILES['csvFile']['tmp_name'];
         $fileName = $_FILES['csvFile']['name'];
@@ -18,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['step-import']) && $_P
         if ($ext !== 'csv') {
             $errors[] = "Le fichier doit être au format CSV.";
         } else {
+            // ouverture du fichier
             $handle = fopen($fileTmp, 'r');
             if (!$handle) {
                 $errors[] = "Impossible d'ouvrir le fichier.";
@@ -27,12 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['step-import']) && $_P
                 while (($data = fgetcsv($handle, 1000, ",")) !== false) { 
                     $lineNumber++;
 
-                    // Si ta première ligne est un header, tu peux la sauter ainsi:
+                    // la première ligne est l'en-tête
+                    // récupère la première ligne pour vérifier les colonnes
                     if ($lineNumber == 1) {
-                        // Optionnel: vérifier si header, sinon commenter la ligne suivante pour traiter tout
                         $header = array_map('strtolower', $data);
+
                         if (in_array('name', $header) && in_array('type', $header) && in_array('description', $header)) {
-                            continue; // saute la ligne d'en-tête
+                            continue; 
                         }
                     }
 
@@ -47,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['step-import']) && $_P
                     $type = trim($data[1]);
                     $description = trim($data[2]);
 
-                    // Validation simple
+                    // Validation simple si les champs sont vides
                     if ($name === '' || $type === '' || $description === '') {
                         $errors[] = "Ligne $lineNumber contient des champs vides obligatoires.";
                         continue;

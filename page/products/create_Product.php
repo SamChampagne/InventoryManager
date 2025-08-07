@@ -112,14 +112,19 @@ Swal.fire({
 <script>
 Swal.fire({
     icon: 'error',
+    toast: true,
+    position: 'top-end',
+    timer: 3000,
     title: 'Erreur',
     html: <?= json_encode(implode('<br>', array_map('htmlspecialchars', $errors))) ?>,
-    confirmButtonText: 'Corriger'
+    confirmButtonText: 'Corriger',
+    showConfirmButton: false
 });
 </script>
 
 <?php endif; ?>
 <script>
+    
 // Script pour la zone de dépôt de fichier
 const dropZone = document.getElementById('dropZone');
 const fileInput = document.getElementById('fileInput');

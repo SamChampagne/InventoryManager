@@ -133,57 +133,67 @@ switch ($page) {
     case 'add_warehouse':
         if ($_SESSION['role'] !== 'admin') { echo "Accès refusé."; break; }
         echo "<h2>Créer un Entrepôt</h2>";
+        echo "<p>Formulaire de création d'un entrepôt.</p>";
         require_once __DIR__ . '/./warehouses/create_Warehouses.php'; // Formulaire de création d'entrepôt
         break;
 
     case 'add_product':
         if ($_SESSION['role'] !== 'admin') { echo "Accès refusé."; break; }
         echo "<h2>Ajouter un Produit</h2>";
+        echo "<p>Formulaire d'ajout et importation des produits dans le programme (Master data).</p>";
         require_once __DIR__ . '/./products/create_Product.php'; // Formulaire de création de produit
         break;
 
     case 'add_employe':
         if ($_SESSION['role'] !== 'admin') { echo "Accès refusé."; break; }
         echo "<h2>Créer un Employé</h2>";
+        echo "<p>Formulaire de création d'un employé.</p>";
         require_once __DIR__ . '/./users/create_employe.php'; // Formulaire de création d'employé
         break;
 
     case 'assign_employe':
         if ($_SESSION['role'] !== 'admin') { echo "Accès refusé."; break; }
         echo "<h2>Assigner un Employé à un Entrepôt</h2>";
+        echo "<p>Formulaire et liste d'assignation des employés à leur entrepôt.</p>";
         require_once __DIR__ . '/./users/assign_user_to_warehouse.php'; // Formulaire d'assignation d'employé
         break;
 
     case 'employe':
         echo "<h2>Liste des Employés</h2>";
-        echo "<p>Liste des employés avec options de gestion et de modification.</p>";
+        echo "<p>Liste des employés avec options de gestions et de modifications.</p>";
         require_once __DIR__ . '/./users/liste_User.php'; // Liste des employés
         break;
     case 'liste_product':
     if ($_SESSION['role'] !== 'admin') { echo "Accès refusé."; break; }
         echo "<h2>Liste des Produits/Matières</h2>";
+        echo "<p>Liste des produits/Matières avec options de gestions et de modifications</p>";
         require_once __DIR__ . '/./products/liste_Product.php'; // Liste des produits
         break;
 
     case 'liste_warehouse':
         if ($_SESSION['role'] !== 'admin') { echo "Accès refusé."; break; }
         echo "<h2>Liste des Entrepôts</h2>";
+        echo "<p>Liste des entrepôts avec options de gestion et de modification.</p>";
         require_once __DIR__ . '/./warehouses/liste_Warehouses.php'; // Liste des entrepôts
         break;
     case 'information':
         echo "<h2>Informations</h2>";
+        echo "<p>Page d'information général sur le projet</p>";
         require_once __DIR__ . '/./information.php'; // Page d'informations générales
         break;
     case 'inventaire_warehouse':
         echo "<h2>Inventaire des Entrepôts</h2>";
+        echo "<p>Page permettant de séléctionner l'inventaire d'un entrepôt pour observer et faire des transactions</p>";
         require_once __DIR__ . '/./inventory/liste_inventory_to_user.php'; // Liste des inventaires accessible à l'utilisateur
         break;
     case 'add_to_inventory':
         echo "<h2>Ajouter un Produit à l'Inventaire</h2>";
+        echo "<p>Formulaire permettant d'ajouter un produit dans un inventaire</p>";
         require_once __DIR__ . '/./inventory/create_product_in_inventory.php'; // Formulaire pour ajouter un produit à l'inventaire
         break;  
     case 'historique_inventaire':
         echo "<h2>Historique des inventaires/transactions</h2>";
+        echo "<p>Liste des transactions fait dans le programme, disponible au admin.</p>";
         require_once __DIR__ . '/./inventory/liste_history_inventory.php'; // Liste de l'historique des transactions d'inventaire
         break;  
 }
