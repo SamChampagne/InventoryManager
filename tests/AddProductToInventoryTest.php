@@ -8,9 +8,9 @@ use PHPUnit\Framework\TestCase;
 
 class AddProductToInventoryTest extends TestCase {
 
-    /**
-     * Test avec des valeurs valides → doit réussir
-     */
+    
+    // Test avec des valeurs valides → doit réussir
+    
     public function testAddProductToInventorySuccess() {
 
         $productId = 999;
@@ -24,9 +24,8 @@ class AddProductToInventoryTest extends TestCase {
         
     }
 
-    /**
-     * Test avec des valeurs invalides → doit échouer
-     */
+    
+    // Test avec des valeurs invalides → doit échouer
     public function testAddProductToInventoryFailure() {
 
         $productId = null; 

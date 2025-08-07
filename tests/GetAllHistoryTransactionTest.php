@@ -5,12 +5,14 @@ require_once __DIR__ . '/../function/getAllHistoryTransaction.php';
 
 class GetAllHistoryTransactionTest extends TestCase
 {
+    // Test pour vérifier que la fonction retourne un tableau
     public function testGetAllHistoryTransactionReturnsArray()
     {
         $transactions = getAllHistoryTransaction();
         $this->assertIsArray($transactions, "La fonction doit retourner un tableau");
     }
 
+    // Test pour vérifier que les clés attendues existent dans le premier résultat
     public function testGetAllHistoryTransactionKeysExist()
     {
         $transactions = getAllHistoryTransaction();
@@ -39,7 +41,7 @@ class GetAllHistoryTransactionTest extends TestCase
             $this->markTestSkipped("Aucune transaction présente dans la base, test ignoré.");
         }
     }
-
+    // Test pour vérifier que le nombre de transactions est supérieur ou égal à zéro
     public function testGetAllHistoryTransactionCount()
     {
         $transactions = getAllHistoryTransaction();

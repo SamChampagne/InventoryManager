@@ -7,6 +7,7 @@ class CreateUserTest extends TestCase
 {
     public function testCreateUserSuccess()
     {
+        // On teste un cas de succès : création d'un utilisateur avec des données valides
         $result = createUser('testUser', 'test@example.com', 'password123', 'admin');
         $this->assertTrue($result, "La création de l'utilisateur devrait réussir avec des données valides");
     }

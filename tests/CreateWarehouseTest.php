@@ -7,6 +7,7 @@ class CreateWarehouseTest extends TestCase
 {
     public function testCreateWarehouseSuccess()
     {
+        // Test avec des données valides => devrait retourner true
         $result = createWarehouse('Entrepôt Test', 'Paris');
         $this->assertTrue($result, "La création de l'entrepôt devrait réussir avec des données valides");
     }

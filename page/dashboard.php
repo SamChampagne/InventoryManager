@@ -66,7 +66,7 @@ if (!isset($_SESSION['user_id'])) {
         <div class="menu-section">
             <div class="menu-toggle">Employé ▸</div>
             <div class="submenu">
-                <a href="?page=employe" class="<?= ($_GET['page'] ?? '') === 'employe' ? 'active' : '' ?>">Liste Employés</a>
+                <a href="?page=employe" class="<?= ($_GET['page'] ?? '') === 'employe' ? 'active' : '' ?>">Liste Employé</a>
                 <a href="?page=add_employe" class="<?= ($_GET['page'] ?? '') === 'add_employe' ? 'active' : '' ?>">Créer Employé</a>
                 <a href="?page=assign_employe" class="<?= ($_GET['page'] ?? '') === 'assign_employe' ? 'active' : '' ?>">Assigner Employé</a>
             </div>
@@ -77,7 +77,7 @@ if (!isset($_SESSION['user_id'])) {
             <div class="menu-toggle">Entrepôt ▸</div>
             <div class="submenu">
                 <!-- LISTER ENTREPÔTS -->
-                <a href="?page=liste_warehouse" class="<?= ($_GET['page'] ?? '') === 'liste_warehouse' ? 'active' : '' ?>">Lister Entrepôts</a>
+                <a href="?page=liste_warehouse" class="<?= ($_GET['page'] ?? '') === 'liste_warehouse' ? 'active' : '' ?>">Lister Entrepôt</a>
                 <a href="?page=add_warehouse" class="<?= ($_GET['page'] ?? '') === 'add_warehouse' ? 'active' : '' ?>">Créer Entrepôt</a>
             </div>
         </div>
@@ -87,7 +87,7 @@ if (!isset($_SESSION['user_id'])) {
             <div class="menu-toggle">Produit ▸</div>
             <div class="submenu">
                 <!-- LISTER PRODUITS -->
-                <a href="?page=liste_product" class="<?= ($_GET['page'] ?? '') === 'liste_product' ? 'active' : '' ?>">Lister Produits</a>
+                <a href="?page=liste_product" class="<?= ($_GET['page'] ?? '') === 'liste_product' ? 'active' : '' ?>">Lister Produit</a>
                 <a href="?page=add_product" class="<?= ($_GET['page'] ?? '') === 'add_product' ? 'active' : '' ?>">Ajouter Produit</a>
             </div>
         </div>

@@ -39,7 +39,7 @@
 
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Assigner</button>
-            <a href="?page=home" class="btn btn-secondary">Annuler</a>
+             <button type="button" class="btn btn-secondary" onclick="window.location.href='?page=assign_employe'">Annuler</button>
         </div>
     </form>
     <br><br>

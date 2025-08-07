@@ -6,9 +6,9 @@ use PHPUnit\Framework\TestCase;
 
 class AddTransactionHistoryTest extends TestCase
 {
-    /**
-     * Test avec des données valides dans la base de données → devrait retourner true
-     */
+    
+    // Test avec des données valides dans la base de données → devrait retourner true
+    
     public function testAddTransactionHistorySuccess()
     {
         // Arrange
@@ -26,9 +26,9 @@ class AddTransactionHistoryTest extends TestCase
         $this->assertTrue($result, "L'ajout d'une transaction valide devrait retourner true.");
     }
 
-    /**
-     * Test avec une valeur invalide → devrait retourner false
-     */
+    
+    // Test avec une valeur invalide → devrait retourner false
+    
     public function testAddTransactionHistoryFailure()
     {
         

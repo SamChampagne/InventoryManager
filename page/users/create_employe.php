@@ -74,7 +74,7 @@
 
                 <div class="col-12">
                     <button type="submit" class="btn btn-success">Créer l'employé</button>
-                    <button type="button" class="btn btn-secondary" onclick="window.history.back()">Annuler</button>
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='?page=add_employe'">Annuler</button>
                 </div>
             </form>
         </div>

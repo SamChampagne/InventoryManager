@@ -28,6 +28,7 @@ class DeleteProductTest extends TestCase
     }
     public function testDeleteNonExistentProduct()
     {
+        // On tente de supprimer un produit qui n'existe pas
         $fakeId = -9999; 
         $deleteResult = deleteProduct($fakeId);
 
