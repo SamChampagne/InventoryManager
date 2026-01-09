@@ -1,0 +1,312 @@
+/* ===================================
+   COMPOSANTS RÉUTILISABLES
+   ================================== */
+
+/* Breadcrumbs personnalisés */
+.custom-breadcrumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-breadcrumb .breadcrumb {
+    margin: 0;
+    background: transparent;
+}
+
+.custom-breadcrumb .breadcrumb-item {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.custom-breadcrumb .breadcrumb-item.active {
+    color: white;
+    font-weight: 600;
+}
+
+.custom-breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* En-têtes de page */
+.page-header {
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.page-header p {
+    color: #7f8c8d;
+    font-size: 1.05rem;
+    margin: 0;
+}
+
+/* Cartes améliorées */
+.enhanced-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-bottom: 25px;
+}
+
+.enhanced-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.enhanced-card .card-header {
+    border-radius: 15px 15px 0 0 !important;
+    padding: 20px 25px;
+    font-weight: 600;
+    font-size: 1.15rem;
+    border-bottom: none;
+}
+
+.enhanced-card .card-body {
+    padding: 25px;
+}
+
+/* Stats Cards */
+.stat-mini-card {
+    border-radius: 12px;
+    padding: 20px;
+    color: white;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.stat-mini-card:hover {
+    transform: translateY(-3px);
+}
+
+.stat-mini-card h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.stat-mini-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.95;
+}
+
+.stat-mini-card.blue { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+.stat-mini-card.green { background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%); }
+.stat-mini-card.orange { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+.stat-mini-card.purple { background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%); }
+.stat-mini-card.red { background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); }
+.stat-mini-card.teal { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+
+/* Boutons d'action */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.btn-custom {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Tables améliorées */
+.enhanced-table {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.enhanced-table thead {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+}
+
+.enhanced-table thead th {
+    color: white;
+    font-weight: 600;
+    padding: 15px;
+    border: none;
+}
+
+.enhanced-table tbody tr {
+    transition: background-color 0.2s;
+}
+
+.enhanced-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.enhanced-table tbody td {
+    padding: 15px;
+    vertical-align: middle;
+}
+
+/* Badges personnalisés */
+.custom-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Formulaires améliorés */
+.enhanced-form .form-label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.enhanced-form .form-control,
+.enhanced-form .form-select {
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    padding: 10px 15px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.enhanced-form .form-control:focus,
+.enhanced-form .form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Alertes personnalisées */
+.custom-alert {
+    border-radius: 10px;
+    border: none;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+}
+
+.custom-alert-success {
+    background: linear-gradient(135deg, #56ab2f15 0%, #a8e06315 100%);
+    border-left: 4px solid #56ab2f;
+    color: #2d5016;
+}
+
+.custom-alert-warning {
+    background: linear-gradient(135deg, #fa709a15 0%, #fee14015 100%);
+    border-left: 4px solid #fa709a;
+    color: #7a3849;
+}
+
+.custom-alert-danger {
+    background: linear-gradient(135deg, #ff6b6b15 0%, #ee5a6f15 100%);
+    border-left: 4px solid #ff6b6b;
+    color: #7a2e2e;
+}
+
+.custom-alert-info {
+    background: linear-gradient(135deg, #4facfe15 0%, #00f2fe15 100%);
+    border-left: 4px solid #4facfe;
+    color: #1e4d5c;
+}
+
+/* Section dividers */
+.section-divider {
+    margin: 30px 0;
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ddd, transparent);
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    color: #bdc3c7;
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    color: #7f8c8d;
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: #95a5a6;
+}
+
+/* Loading spinner */
+.custom-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .stat-mini-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-buttons .btn {
+        width: 100%;
+    }
+}
+
+/* Icon helpers */
+.icon-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Modal amélioré */
+.modal-content {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    border-radius: 15px 15px 0 0;
+    border-bottom: none;
+    padding: 20px 25px;
+}
+
+.modal-body {
+    padding: 25px;
+}
+
+.modal-footer {
+    border-top: none;
+    padding: 20px 25px;
+}
