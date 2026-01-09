@@ -18,7 +18,7 @@
 
 session_start();
 
-/** Déclaration des services pour chaque page que j'utilise */ 
+/** Déclaration des services pour chaque page que j'utilise */
 require_once __DIR__ . '/../config/dbConfig.php';
 require_once __DIR__ . '/../services/createUser-transaction.php';
 require_once __DIR__ . '/../services/getAllUser-transaction.php';
@@ -30,6 +30,7 @@ require_once __DIR__ . '/../services/assignUserToWarehouses-transaction.php';
 require_once __DIR__ . '/../services/listeInventoryToUser-transaction.php';
 require_once __DIR__ . '/../services/createProductInInventory-transaction.php';
 require_once __DIR__ . '/../services/listeHistoryInventory-transaction.php';
+require_once __DIR__ . '/../services/dashboard-transaction.php';
 
 
 // Vérifie si utilisateur est connecté, le fait une fois, car on reste sur du single page qui est la dashboard.
@@ -60,6 +61,11 @@ if (!isset($_SESSION['user_id'])) {
         </a>
     </div>
     
+
+    <!-- Lien Dashboard (pour tous les utilisateurs) -->
+    <a href="?page=dashboard_home" class="<?= ($_GET['page'] ?? 'dashboard_home') === 'dashboard_home' ? 'active' : '' ?>" style="padding: 15px 20px; text-decoration: none; display: block; color: #ecf0f1; border-left: 3px solid transparent;">
+        📊 Dashboard
+    </a>
 
     <?php if ($_SESSION['role'] === 'admin'): ?>
         <!-- EMPLOYÉ -->
@@ -115,6 +121,11 @@ if (!isset($_SESSION['user_id'])) {
         </div>
     <?php endif; ?>
 
+    <!-- Lien Information (pour tous les utilisateurs) -->
+    <a href="?page=information" class="<?= ($_GET['page'] ?? '') === 'information' ? 'active' : '' ?>" style="padding: 15px 20px; text-decoration: none; display: block; color: #ecf0f1; border-left: 3px solid transparent;">
+        ℹ️ Informations
+    </a>
+
     <a href="./logout.php" style="margin-top:auto; color:#e74c3c; padding: 15px 20px; border-left:none;">Déconnexion</a>
 </nav>
 
@@ -123,13 +134,17 @@ if (!isset($_SESSION['user_id'])) {
     
 <?php
 // Page par défaut
-$page = $_GET['page'] ?? 'information';
+$page = $_GET['page'] ?? 'dashboard_home';
 
 /* * Gestion des pages
  * Chaque case du switch correspond à une page différente de l'application.
  * Le contenu de chaque page est inclus dynamiquement en fonction de la valeur de $_GET['page'].
  */
 switch ($page) {
+    case 'dashboard_home':
+        echo "<h2>Tableau de bord</h2>";
+        require_once __DIR__ . '/./dashboard_home.php'; // Page du dashboard avec statistiques
+        break;
     case 'add_warehouse':
         if ($_SESSION['role'] !== 'admin') { echo "Accès refusé."; break; }
         echo "<h2>Créer un Entrepôt</h2>";
