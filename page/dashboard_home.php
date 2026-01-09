@@ -6,7 +6,7 @@
 require_once __DIR__ . '/../services/dashboard-transaction.php';
 
 // Récupération des données du dashboard
-$dashboardData = getDashboardData($pdo);
+$dashboardData = getDashboardData();
 $stats = $dashboardData['stats'];
 $lowStockProducts = $dashboardData['low_stock'];
 $topProducts = $dashboardData['top_products'];
